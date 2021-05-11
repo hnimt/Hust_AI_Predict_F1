@@ -94,11 +94,11 @@ public class CalculationController {
         return pos - neg*tmpPi;
     }
 
-    public float calculateResult(List<F1Evidence> f1Evidences){
+    public float calculateResult(List<F1Evidence> f1EvidenceRepositories){
         List<Float> listPos = new ArrayList<>();
         List<Float> listNeu = new ArrayList<>();
         List<Float> listNeg = new ArrayList<>();
-        for (F1Evidence f1Evidence : f1Evidences){
+        for (F1Evidence f1Evidence : f1EvidenceRepositories){
             Evidence evidence = f1Evidence.getEvidence();
             F1 f1 = f1Evidence.getF1();
             float f1EviPos = f1Evidence.getPositive();

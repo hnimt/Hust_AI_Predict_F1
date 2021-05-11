@@ -4,6 +4,7 @@ import sample.Database.Database;
 import sample.Model.Evidence;
 import sample.Model.F1;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,25 +32,6 @@ public class F1Repository {
 
     }
 
-//    public F1 getLastF1(){
-//        String sql = "SELECT * FROM Table ORDER BY ID DESC LIMIT 1";
-//        F1 f1 = new F1();
-//        try {
-//            Statement sm = Database.getInstance().connect().createStatement();
-//            ResultSet resultSet = sm.executeQuery(sql);
-//            while (resultSet.next()){
-//                int f1Id = resultSet.getInt("F1ID");
-//                String f1Name = resultSet.getString("F1Name");
-//                String f1Description = resultSet.getString("F1Description");
-//                String f0Name = resultSet.getString("F0Name");
-//                f1 = new F1(f1Id, f1Name, f1Description, f0Name);
-//            }
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//        } finally {
-//            Database.getInstance().disconnect();
-//            return f1;
-//        }
-//    }
+
 
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.3182957393483709" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.EditEvidenceDiseaseController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="261.0">
+         <children>
+            <Label layoutX="42.0" layoutY="84.0" text="Evidence" />
+            <ComboBox fx:id="cbEvidence" layoutX="42.0" layoutY="120.0" prefWidth="150.0" />
+            <Label layoutX="42.0" layoutY="199.0" text="Disease" />
+            <ComboBox fx:id="cbDisease" layoutX="42.0" layoutY="224.0" prefWidth="150.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="544.0">
+         <children>
+            <Label layoutX="85.0" layoutY="136.0" text="Positive" />
+            <Label layoutX="250.0" layoutY="136.0" text="Neutral" />
+            <Label layoutX="410.0" layoutY="136.0" text="Negative" />
+            <TextField fx:id="txtPositive" layoutX="35.0" layoutY="174.0" prefHeight="27.0" prefWidth="142.0" />
+            <TextField fx:id="txtNeutral" layoutX="199.0" layoutY="174.0" prefHeight="27.0" prefWidth="142.0" />
+            <TextField fx:id="txtNegative" layoutX="363.0" layoutY="174.0" prefHeight="27.0" prefWidth="142.0" />
+            <Button fx:id="btnOk" layoutX="392.0" layoutY="259.0" mnemonicParsing="false" text="OK" />
+            <Button fx:id="btnCancel" layoutX="448.0" layoutY="259.0" mnemonicParsing="false" text="Cancel" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

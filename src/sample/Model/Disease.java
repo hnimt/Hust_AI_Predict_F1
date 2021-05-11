@@ -16,6 +16,12 @@ public class Disease {
         this.diseaseUrlImage = diseaseUrlImage;
     }
 
+    public Disease(int diseaseId, String diseaseName, String diseaseDescription) {
+        this.diseaseId = diseaseId;
+        this.diseaseName = diseaseName;
+        this.diseaseDescription = diseaseDescription;
+    }
+
     public int getDiseaseId() {
         return diseaseId;
     }

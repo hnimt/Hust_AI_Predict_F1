@@ -48,4 +48,11 @@ public class EvidenceRepository {
             return evidenceList;
         }
     }
+
+    public Evidence findEviByName(String name){
+        for (Evidence evidence : evidenceList){
+            if (evidence.getEvidenceName().equalsIgnoreCase(name)) return evidence;
+        }
+        return null;
+    }
 }

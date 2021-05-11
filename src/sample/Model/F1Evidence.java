@@ -1,6 +1,9 @@
 package sample.Model;
 
 
+import sample.Model.Evidence;
+import sample.Model.F1;
+
 public class F1Evidence {
     private F1 f1;
     private Evidence evidence;

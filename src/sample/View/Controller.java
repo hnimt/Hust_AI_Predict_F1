@@ -5,18 +5,25 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sample.Controller.CalculationController;
 import sample.Model.Evidence;
 import sample.Model.F1;
+import sample.Model.F1Disease;
 import sample.Model.F1Evidence;
 import sample.Repository.EvidenceRepository;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -30,6 +37,10 @@ public class Controller implements Initializable {
     private TextField txtF0Name;
     @FXML
     private Label txtResult;
+    @FXML
+    private MenuItem mnSave;
+    @FXML
+    private MenuItem mnEdit;
 
     @FXML
     private Button btnChooseImage;
@@ -41,38 +52,49 @@ public class Controller implements Initializable {
     private List<F1Evidence> f1EvidenceList;
     private EvidenceRepository evidenceRepository;
     private F1 f1;
+    private F1Disease f1Disease;
 
     private CalculationController calcController;
+    float result;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        f1Disease = new F1Disease();
         calcController = new CalculationController();
         f1 = new F1();
         f1EvidenceList = new ArrayList<>();
+        evidenceRepository = new EvidenceRepository();
+        List<Evidence> evidenceList = evidenceRepository.getAllEvidences();
+
+
         grid.setPadding(new Insets(10));
         grid.setVgap(20);
         grid.setHgap(20);
         grid.setAlignment(Pos.CENTER);
 
-        int columnIndex = 0;
-        int rowIndex = 0;
-        evidenceRepository = new EvidenceRepository();
-        List<Evidence> evidenceList = evidenceRepository.getAllEvidences();
-
-        // Print grid
-        for (Evidence evidence : evidenceList){
-            if (columnIndex > 2){
-                columnIndex=0;
-                rowIndex++;
-                GridPane subGrid = showSubGrid(f1, evidence);
-                grid.add(subGrid, columnIndex, rowIndex);
-                columnIndex++;
-            } else {
-                GridPane subGrid = showSubGrid(f1, evidence);
-                grid.add(subGrid, columnIndex, rowIndex);
-                columnIndex++;
+        // Menu save
+        mnSave.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                f1Disease.addF1DiseaseToDB(f1, 1, result);
             }
-        }
+        });
+
+        // Menu edit
+        mnEdit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    showEviDisEdit();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Print sub grid
+        printSubGrid(evidenceList);
+
 
         // Calculate
         btnCalculate.setOnAction(new EventHandler<ActionEvent>() {
@@ -85,14 +107,14 @@ public class Controller implements Initializable {
                 if (!isSumProbValid(f1EvidenceList)){
                     showErrSumProb();
                 } else {
-                    float result = calcController.calculateResult(f1EvidenceList);
+                    result = calcController.calculateResult(f1EvidenceList);
                     txtResult.setText(printPredictResult(result));
                 }
             }
         });
     }
 
-    // Print subgrid
+    // Function handle subgrid
     public GridPane showSubGrid(F1 f1, Evidence evidence){
         F1Evidence f1Evidence = new F1Evidence(f1, evidence);
         GridPane subGrid = new GridPane();
@@ -170,6 +192,26 @@ public class Controller implements Initializable {
         return subGrid;
     }
 
+    public void printSubGrid(List<Evidence> evidenceList){
+        int columnIndex = 0;
+        int rowIndex = 0;
+        for (Evidence evidence : evidenceList){
+            if (columnIndex > 2){
+                columnIndex=0;
+                rowIndex++;
+                GridPane subGrid = showSubGrid(f1, evidence);
+                grid.add(subGrid, columnIndex, rowIndex);
+                columnIndex++;
+            } else {
+                GridPane subGrid = showSubGrid(f1, evidence);
+                grid.add(subGrid, columnIndex, rowIndex);
+                columnIndex++;
+            }
+        }
+    }
+
+
+    // Change string gia tu to float
     public float changeStrToFl(String str){
         if (str.equalsIgnoreCase("None")) return 0;
         else if (str.equalsIgnoreCase("Very Low")) return 0.125F;
@@ -183,6 +225,8 @@ public class Controller implements Initializable {
         return -1;
     }
 
+
+    // Handle error
     public void showErrSumProb(){
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error sum probability");
@@ -191,18 +235,34 @@ public class Controller implements Initializable {
         alert.show();
     }
 
-    public boolean isSumProbValid(List<F1Evidence> f1Evidences){
-        for (F1Evidence f1Evidence : f1Evidences){
-            if ((f1Evidence.getPositive()+f1Evidence.getNeutral()+f1Evidence.getNegative()) > 1) return false;
+    public boolean isSumProbValid(List<F1Evidence> f1EvidenceRepositories){
+        for (F1Evidence f1Evidence : f1EvidenceRepositories){
+            if ((f1Evidence.getPositive()+ f1Evidence.getNeutral()+ f1Evidence.getNegative()) > 1) return false;
         }
         return true;
     }
 
+    // Print predict result
     public String printPredictResult(float result){
         Float percentResult = result * 100;
         if (result < 0.25) return String.format("Very low risk of Covid 19 infection with : %.2f%%.", percentResult);
         if (result < 0.5) return String.format("Low risk of Covid 19 infection with : %.2f%%.", percentResult);
         if (result < 0.75) return String.format("High risk of Covid 19 infection with : %.2f%%.", percentResult);
         else return String.format("Very high risk of Covid 19 infection with : %.2f%%.", percentResult);
+    }
+
+    // Show EvidenceDisease edit
+    public void showEviDisEdit() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("EditEvidenceDisease.fxml"));
+        Parent editEviDis = loader.load();
+        EditEvidenceDiseaseController editController = loader.getController();
+        editController.setData();
+        editController.editEviDis();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(editEviDis);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 }
