@@ -1,17 +1,41 @@
 package sample.Model;
 
 import sample.Database.Database;
+import sample.Repository.DiseaseRepository;
 import sample.Repository.F1Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class F1Disease {
     private int id;
     private F1 f1;
     private Disease disease;
     private float prediction;
+
+    public F1Disease() {
+    }
+
+    public F1Disease(int id, F1 f1, Disease disease, float prediction) {
+        this.id = id;
+        this.f1 = f1;
+        this.disease = disease;
+        this.prediction = prediction;
+    }
+
+    @Override
+    public String toString() {
+        return "F1Disease{" +
+                "id=" + id +
+                ", f1=" + f1.getF1Name() +
+                ", disease=" + disease.getDiseaseName() +
+                ", prediction=" + prediction +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -61,6 +85,29 @@ public class F1Disease {
         } finally {
             Database.getInstance().disconnect();
             return index;
+        }
+    }
+
+    // Get all F1Disease
+    public List<F1Disease> getAllF1Disease(){
+        List<F1Disease> f1Diseases = new ArrayList<>();
+        String sql = "SELECT * FROM `F1Disease` ORDER BY Prediction DESC";
+        try {
+            Statement sm = Database.getInstance().connect().createStatement();
+            ResultSet resultSet = sm.executeQuery(sql);
+            while (resultSet.next()){
+                int id = resultSet.getInt("ID");
+                int f1Id = resultSet.getInt("F1");
+                int diseaseId = resultSet.getInt("Disease");
+                float prediction = resultSet.getFloat("Prediction");
+                F1Disease f1Disease = new F1Disease(id, F1Repository.findF1ById(f1Id), DiseaseRepository.findDisById(diseaseId), prediction);
+                f1Diseases.add(f1Disease);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        } finally {
+            Database.getInstance().disconnect();
+            return f1Diseases;
         }
     }
 

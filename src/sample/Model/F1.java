@@ -18,6 +18,13 @@ public class F1 {
         F1UrlImage = f1UrlImage;
     }
 
+    public F1(int f1Id, String f1Name, String f1Description, String f0Name) {
+        F1Id = f1Id;
+        F1Name = f1Name;
+        F1Description = f1Description;
+        F0Name = f0Name;
+    }
+
     public F1(String f1Name, String f1Description, String f0Name) {
         F1Name = f1Name;
         F1Description = f1Description;

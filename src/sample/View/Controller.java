@@ -26,6 +26,7 @@ import sample.Repository.EvidenceRepository;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
@@ -40,7 +41,11 @@ public class Controller implements Initializable {
     @FXML
     private MenuItem mnSave;
     @FXML
+    private MenuItem mnNew;
+    @FXML
     private MenuItem mnEdit;
+    @FXML
+    private MenuItem mnView;
 
     @FXML
     private Button btnChooseImage;
@@ -66,7 +71,6 @@ public class Controller implements Initializable {
         evidenceRepository = new EvidenceRepository();
         List<Evidence> evidenceList = evidenceRepository.getAllEvidences();
 
-
         grid.setPadding(new Insets(10));
         grid.setVgap(20);
         grid.setHgap(20);
@@ -80,12 +84,37 @@ public class Controller implements Initializable {
             }
         });
 
+        // Menu new
+        mnNew.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                txtName.clear();
+                txtDescription.clear();
+                txtF0Name.clear();
+                txtResult.setText("");
+                grid.getChildren().clear();
+                printSubGrid(evidenceList);
+            }
+        });
+
         // Menu edit
         mnEdit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     showEviDisEdit();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Menu view
+        mnView.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    showF1Disease();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -104,10 +133,14 @@ public class Controller implements Initializable {
                 f1.setF1Description(txtDescription.getText());
                 f1.setF0Name(txtDescription.getText());
 
-                if (!isSumProbValid(f1EvidenceList)){
+                List<F1Evidence> tmpF1EvidenceList = f1EvidenceList.stream()
+                        .filter(f1Evidence -> f1Evidence.getPositive()!=0 || f1Evidence.getNeutral()!=0 || f1Evidence.getNegative()!=0)
+                        .collect(Collectors.toList());
+
+                if (!isSumProbValid(tmpF1EvidenceList)){
                     showErrSumProb();
                 } else {
-                    result = calcController.calculateResult(f1EvidenceList);
+                    result = calcController.calculateResult(tmpF1EvidenceList);
                     txtResult.setText(printPredictResult(result));
                 }
             }
@@ -118,6 +151,7 @@ public class Controller implements Initializable {
     public GridPane showSubGrid(F1 f1, Evidence evidence){
         F1Evidence f1Evidence = new F1Evidence(f1, evidence);
         GridPane subGrid = new GridPane();
+        subGrid.getStyleClass().add("subgrid");
         subGrid.setVgap(10);
         subGrid.setHgap(10);
         subGrid.setAlignment(Pos.CENTER);
@@ -136,15 +170,20 @@ public class Controller implements Initializable {
         comboBoxNeutral.setValue("None");
         ComboBox comboBoxNegative = new ComboBox(giaTu);
         comboBoxNegative.setValue("None");
+        comboBoxPositive.getStyleClass().add("select");
+        comboBoxNeutral.getStyleClass().add("select");
+        comboBoxNegative.getStyleClass().add("select");
 
         Label lblPosVal = new Label();
         lblPosVal.setPrefWidth(105);
         lblPosVal.setAlignment(Pos.CENTER);
         lblPosVal.setText(String.valueOf(changeStrToFl(comboBoxPositive.getValue().toString())));
+
         Label lblNeuVal = new Label();
         lblNeuVal.setPrefWidth(105);
         lblNeuVal.setAlignment(Pos.CENTER);
         lblNeuVal.setText(String.valueOf(changeStrToFl(comboBoxNeutral.getValue().toString())));
+
         Label lblNegVal = new Label();
         lblNegVal.setPrefWidth(105);
         lblNegVal.setAlignment(Pos.CENTER);
@@ -186,6 +225,7 @@ public class Controller implements Initializable {
                 lblNegVal.setText(String.valueOf(negative));
             }
         });
+
 
         f1EvidenceList.add(f1Evidence);
 
@@ -262,6 +302,20 @@ public class Controller implements Initializable {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(editEviDis);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    // Show EvidenceDisease edit
+    public void showF1Disease() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ViewF1List.fxml"));
+        Parent viewF1List = loader.load();
+        ViewF1ListController viewF1ListController = loader.getController();
+        viewF1ListController.printTable();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(viewF1List);
         stage.setScene(scene);
         stage.showAndWait();
     }

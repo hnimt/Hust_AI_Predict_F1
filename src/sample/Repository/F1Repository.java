@@ -32,6 +32,25 @@ public class F1Repository {
 
     }
 
-
+    public static F1 findF1ById(int id){
+        String sql = "SELECT * FROM `F1` WHERE F1ID = ?";
+        F1 f1 = null;
+        try {
+            PreparedStatement ps = Database.getInstance().connect().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                int f1Id = resultSet.getInt("F1ID");
+                String f1Name = resultSet.getString("F1Name");
+                String f1Des = resultSet.getString("F1Description");
+                String f0Name = resultSet.getString("F0Name");
+                f1 = new F1(f1Id, f1Name, f1Des, f0Name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            return f1;
+        }
+    }
 
 }

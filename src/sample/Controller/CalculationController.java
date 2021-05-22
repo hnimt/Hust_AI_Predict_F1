@@ -2,7 +2,6 @@ package sample.Controller;
 
 import sample.Database.Database;
 import sample.Model.Evidence;
-import sample.Model.F1;
 import sample.Model.F1Evidence;
 import sample.Repository.F1Repository;
 
@@ -64,21 +63,12 @@ public class CalculationController {
         }
     }
 
-    public float findMin(float f1EvidenceProbability, float evidenceDiseaseProbability){
-        if (f1EvidenceProbability > evidenceDiseaseProbability) {
-            if (evidenceDiseaseProbability <= 0) return f1EvidenceProbability;
-            else return evidenceDiseaseProbability;
-        } else {
-            return f1EvidenceProbability;
-        }
+    public float findIntersect(float f1EvidenceProbability, float evidenceDiseaseProbability){
+        return Math.max(0, f1EvidenceProbability + evidenceDiseaseProbability - 1);
     }
 
-    public float findMax(float f1EvidenceProbability, float evidenceDiseaseProbability){
-        if (f1EvidenceProbability > evidenceDiseaseProbability) {
-            return f1EvidenceProbability;
-        } else {
-            return evidenceDiseaseProbability;
-        }
+    public float findUnion(float f1EvidenceProbability, float evidenceDiseaseProbability){
+        return Math.min(1, f1EvidenceProbability + evidenceDiseaseProbability);
     }
 
     public float findMaxList(List<Float> floatList){
@@ -94,22 +84,21 @@ public class CalculationController {
         return pos - neg*tmpPi;
     }
 
-    public float calculateResult(List<F1Evidence> f1EvidenceRepositories){
+    public float calculateResult(List<F1Evidence> f1Evidences){
         List<Float> listPos = new ArrayList<>();
         List<Float> listNeu = new ArrayList<>();
         List<Float> listNeg = new ArrayList<>();
-        for (F1Evidence f1Evidence : f1EvidenceRepositories){
+        for (F1Evidence f1Evidence : f1Evidences){
             Evidence evidence = f1Evidence.getEvidence();
-            F1 f1 = f1Evidence.getF1();
             float f1EviPos = f1Evidence.getPositive();
             float eviDisPos = getProbabilityByEvidenceAndDisease("Positive", evidence.getEvidenceId(), 1);
-            listPos.add(findMin(f1EviPos, f1EviPos));
+            listPos.add(findIntersect(f1EviPos, eviDisPos));
             float f1EviNeu = f1Evidence.getNeutral();
             float eviDisNeu = getProbabilityByEvidenceAndDisease("Neutral", evidence.getEvidenceId(), 1);
-            listNeu.add(findMin(f1EviNeu, eviDisNeu));
+            listNeu.add(findIntersect(f1EviNeu, eviDisNeu));
             float f1EviNeg = f1Evidence.getNegative();
             float EviDisNeg = getProbabilityByEvidenceAndDisease("Negative", evidence.getEvidenceId(), 1);
-            listNeg.add(findMax(f1EviNeg, EviDisNeg));
+            listNeg.add(findUnion(f1EviNeg, EviDisNeg));
         }
         float finalPos = findMaxList(listPos);
         float finalNeu = findMinList(listNeu);

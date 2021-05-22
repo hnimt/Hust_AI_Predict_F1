@@ -2,7 +2,9 @@ package sample.Repository;
 
 import sample.Database.Database;
 import sample.Model.Evidence;
+import sample.Model.F1;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -54,5 +56,26 @@ public class EvidenceRepository {
             if (evidence.getEvidenceName().equalsIgnoreCase(name)) return evidence;
         }
         return null;
+    }
+
+    public static Evidence findEviById(int id){
+        String sql = "SELECT * FROM `Evidence` WHERE EvidenceID = ?";
+        Evidence evidence = null;
+        try {
+            PreparedStatement ps = Database.getInstance().connect().prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                int eviId = resultSet.getInt("EvidenceID");
+                String eviName = resultSet.getString("EvidenceName");
+                String eviDes = resultSet.getString("EvidenceDescription");
+                evidence = new Evidence(eviId, eviName, eviDes);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database.getInstance().disconnect();
+            return evidence;
+        }
     }
 }

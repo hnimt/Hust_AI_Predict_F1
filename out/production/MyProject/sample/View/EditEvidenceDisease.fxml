@@ -6,16 +6,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.3182957393483709" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.EditEvidenceDiseaseController">
+<SplitPane dividerPositions="0.3182957393483709" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../stylesheets/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.EditEvidenceDiseaseController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="261.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="281.0">
          <children>
-            <Label layoutX="42.0" layoutY="84.0" text="Evidence" />
-            <ComboBox fx:id="cbEvidence" layoutX="42.0" layoutY="120.0" prefWidth="150.0" />
-            <Label layoutX="42.0" layoutY="199.0" text="Disease" />
-            <ComboBox fx:id="cbDisease" layoutX="42.0" layoutY="224.0" prefWidth="150.0" />
+            <Label layoutX="30.0" layoutY="89.0" text="Evidence" />
+            <ComboBox fx:id="cbEvidence" layoutX="30.0" layoutY="121.0" prefHeight="27.0" prefWidth="191.0" />
+            <Label layoutX="34.0" layoutY="199.0" text="Disease" />
+            <ComboBox fx:id="cbDisease" layoutX="30.0" layoutY="224.0" prefHeight="27.0" prefWidth="191.0" />
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="544.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="519.0">
          <children>
             <Label layoutX="85.0" layoutY="136.0" text="Positive" />
             <Label layoutX="250.0" layoutY="136.0" text="Neutral" />

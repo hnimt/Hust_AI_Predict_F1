@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -10,14 +11,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900" prefWidth="1280" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900" prefWidth="1500" stylesheets="@../stylesheets/styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem fx:id="mnNew" mnemonicParsing="false" text="New" />
               <MenuItem fx:id="mnSave" mnemonicParsing="false" text="Save" />
-                  <MenuItem fx:id="mnClose" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -25,9 +26,9 @@
               <MenuItem fx:id="mnEdit" mnemonicParsing="false" text="Edit Evidence Disease" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu mnemonicParsing="false" text="View">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="mnView" mnemonicParsing="false" text="View F1 list" />
             </items>
           </Menu>
         </menus>
@@ -36,46 +37,44 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="385.0" prefWidth="1280.0">
+            <AnchorPane prefHeight="346.0" prefWidth="1500.0">
                <children>
-                  <Label layoutX="112.0" layoutY="160.0" text="Name">
+                  <Label layoutX="372.0" layoutY="162.0" text="Name">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtName" layoutX="201.0" layoutY="154.0" prefHeight="32.0" prefWidth="391.0">
+                  <TextField fx:id="txtName" layoutX="516.0" layoutY="156.0" prefHeight="35.0" prefWidth="547.0">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="115.0" layoutY="205.0" text="Description">
+                  <Label layoutX="372.0" layoutY="205.0" text="Description">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtDescription" layoutX="201.0" layoutY="199.0" prefHeight="32.0" prefWidth="391.0">
+                  <TextField fx:id="txtDescription" layoutX="516.0" layoutY="199.0" prefHeight="35.0" prefWidth="547.0">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </TextField>
-                  <ImageView fitHeight="180.0" fitWidth="232.0" layoutX="798.0" layoutY="96.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="btnChooseImage" layoutX="858.0" layoutY="306.0" mnemonicParsing="false" text="Choose image" />
-                  <Label layoutX="112.0" layoutY="99.0" text="F1 Information">
+                  <Label layoutX="368.0" layoutY="101.0" text="F1 Information">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label layoutX="448.0" layoutY="22.0" text="Application supports calculate F1">
+                  <Label layoutX="485.0" layoutY="26.0" text="Application supports to category F1" textFill="#332bcc">
                      <font>
-                        <Font size="28.0" />
+                        <Font size="36.0" />
                      </font></Label>
-                  <Label layoutX="113.0" layoutY="253.0" text="F0">
+                  <Label layoutX="372.0" layoutY="253.0" text="F0">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtF0Name" layoutX="201.0" layoutY="247.0" prefHeight="32.0" prefWidth="391.0">
+                  <TextField fx:id="txtF0Name" layoutX="516.0" layoutY="247.0" prefHeight="35.0" prefWidth="547.0">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="18.0" />
                      </font>
                   </TextField>
                </children>
@@ -92,13 +91,16 @@
 <!--                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />-->
 <!--              </rowConstraints>-->
             </GridPane>
-            <AnchorPane prefHeight="150.0">
+            <AnchorPane prefHeight="182.0" prefWidth="1500.0">
                <children>
-                  <Label fx:id="txtResult" layoutX="203.0" layoutY="28.0" prefHeight="95.0" prefWidth="633.0" text="Result" wrapText="true">
+                  <Label fx:id="txtResult" layoutX="517.0" layoutY="6.0" prefHeight="95.0" prefWidth="842.0" text="Result" textFill="#ff0101" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Button fx:id="btnCalculate" layoutX="115.0" layoutY="62.0" mnemonicParsing="false" text="Calculate" />
+                  <Button fx:id="btnCalculate" layoutX="373.0" layoutY="36.0" mnemonicParsing="false" styleClass="btn" text="Calculate">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </children>
