@@ -175,21 +175,21 @@ public class Controller implements Initializable {
         comboBoxNegative.getStyleClass().add("select");
 
         Label lblPosVal = new Label();
-        lblPosVal.setPrefWidth(105);
+        lblPosVal.setPrefWidth(130);
         lblPosVal.setAlignment(Pos.CENTER);
         lblPosVal.setText(String.valueOf(changeStrToFl(comboBoxPositive.getValue().toString())));
 
         Label lblNeuVal = new Label();
-        lblNeuVal.setPrefWidth(105);
+        lblNeuVal.setPrefWidth(130);
         lblNeuVal.setAlignment(Pos.CENTER);
         lblNeuVal.setText(String.valueOf(changeStrToFl(comboBoxNeutral.getValue().toString())));
 
         Label lblNegVal = new Label();
-        lblNegVal.setPrefWidth(105);
+        lblNegVal.setPrefWidth(130);
         lblNegVal.setAlignment(Pos.CENTER);
         lblNegVal.setText(String.valueOf(changeStrToFl(comboBoxNegative.getValue().toString())));
 
-        subGrid.add(evidenceName, 0, 0);
+        subGrid.add(evidenceName, 0, 0, 3, 1);
         subGrid.add(lblPositive, 0, 1);
         subGrid.add(lblNeutral, 1, 1);
         subGrid.add(lblNegative, 2, 1);
