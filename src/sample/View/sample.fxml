@@ -59,15 +59,15 @@
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="515.0" layoutY="106.0" text="F1 Information">
+                  <Label layoutX="515.0" layoutY="106.0" text="F1 Information" textFill="#bb371a">
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label layoutX="632.0" layoutY="31.0" text="Application supports to category F1" textFill="#332bcc">
+                  <Label layoutX="632.0" layoutY="31.0" text="Application supports to category F1" textFill="#962d2d">
                      <font>
                         <Font size="36.0" />
                      </font></Label>
-                  <Label layoutX="519.0" layoutY="258.0" text="F0">
+                  <Label layoutX="519.0" layoutY="258.0" text="Location">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -93,11 +93,11 @@
             </GridPane>
             <AnchorPane prefHeight="182.0" prefWidth="1500.0">
                <children>
-                  <Label fx:id="txtResult" layoutX="668.0" prefHeight="95.0" prefWidth="842.0" text="Result" textFill="#ff0101" wrapText="true">
+                  <Label fx:id="txtResult" layoutX="668.0" prefHeight="95.0" prefWidth="842.0" text="Result" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Button fx:id="btnCalculate" layoutX="524.0" layoutY="30.0" mnemonicParsing="false" styleClass="btn" text="Predict">
+                  <Button fx:id="btnCalculate" layoutX="540.0" layoutY="30.0" mnemonicParsing="false" styleClass="btn" text="Predict">
                      <font>
                         <Font size="18.0" />
                      </font></Button>

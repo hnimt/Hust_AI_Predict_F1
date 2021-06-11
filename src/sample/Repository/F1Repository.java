@@ -43,7 +43,7 @@ public class F1Repository {
                 int f1Id = resultSet.getInt("F1ID");
                 String f1Name = resultSet.getString("F1Name");
                 String f1Des = resultSet.getString("F1Description");
-                String f0Name = resultSet.getString("F0Name");
+                String f0Name = resultSet.getString("Location");
                 f1 = new F1(f1Id, f1Name, f1Des, f0Name);
             }
         } catch (SQLException e) {

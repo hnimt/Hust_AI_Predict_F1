@@ -141,7 +141,7 @@ public class Controller implements Initializable {
                     showErrSumProb();
                 } else {
                     result = calcController.calculateResult(tmpF1EvidenceList);
-                    txtResult.setText(printPredictResult(result));
+                    printPredictResult(result);
                 }
             }
         });
@@ -259,7 +259,7 @@ public class Controller implements Initializable {
         else if (str.equalsIgnoreCase("A little low")) return 0.375F;
         else if (str.equalsIgnoreCase("Medium")) return 0.5F;
         else if (str.equalsIgnoreCase("A little high")) return 0.625F;
-        else if (str.equalsIgnoreCase("High")) return 0.625F;
+        else if (str.equalsIgnoreCase("High")) return 0.75F;
         else if (str.equalsIgnoreCase("Very high")) return 0.875F;
         else if (str.equalsIgnoreCase("Perfect")) return 1F;
         return -1;
@@ -283,12 +283,21 @@ public class Controller implements Initializable {
     }
 
     // Print predict result
-    public String printPredictResult(float result){
+    public void printPredictResult(float result){
         Float percentResult = result * 100;
-        if (result < 0.25) return String.format("Very low risk of Covid 19 infection with : %.2f%%.", percentResult);
-        if (result < 0.5) return String.format("Low risk of Covid 19 infection with : %.2f%%.", percentResult);
-        if (result < 0.75) return String.format("High risk of Covid 19 infection with : %.2f%%.", percentResult);
-        else return String.format("Very high risk of Covid 19 infection with : %.2f%%.", percentResult);
+        if (result < 0.25){
+            txtResult.setText(String.format("Very low risk of Covid 19 infection with : %.2f%%.", percentResult));
+            txtResult.setStyle("-fx-text-fill: #150e56;");
+        } else if (result < 0.5){
+            txtResult.setText(String.format("Low risk of Covid 19 infection with : %.2f%%.", percentResult));
+            txtResult.setStyle("-fx-text-fill: #335d2d;");
+        } else if (result < 0.75){
+            txtResult.setText(String.format("High risk of Covid 19 infection with : %.2f%%.", percentResult));
+            txtResult.setStyle("-fx-text-fill: #da723c;");
+        } else{
+            txtResult.setText(String.format("Very high risk of Covid 19 infection with : %.2f%%.", percentResult));
+            txtResult.setStyle("-fx-text-fill: #6a097d;");
+        }
     }
 
     // Show EvidenceDisease edit
