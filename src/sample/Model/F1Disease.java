@@ -113,12 +113,12 @@ public class F1Disease {
 
     // Add F1 to DB
     public void addF1ToDB(F1 f1){
-        String sql = "INSERT INTO `F1`(`F1Name`, `F1Description`, `F0Name`) VALUES (?,?,?)";
+        String sql = "INSERT INTO `F1`(`F1Name`, `F1Description`, `Location`) VALUES (?,?,?)";
         try {
             PreparedStatement ps = Database.getInstance().connect().prepareStatement(sql);
             ps.setString(1, f1.getF1Name());
             ps.setString(2, f1.getF1Description());
-            ps.setString(3, f1.getF0Name());
+            ps.setString(3, f1.getLocation());
             ps.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();

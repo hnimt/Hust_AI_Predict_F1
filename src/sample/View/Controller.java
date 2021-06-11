@@ -93,6 +93,7 @@ public class Controller implements Initializable {
                 txtF0Name.clear();
                 txtResult.setText("");
                 grid.getChildren().clear();
+                f1EvidenceList.clear();
                 printSubGrid(evidenceList);
             }
         });
@@ -131,7 +132,7 @@ public class Controller implements Initializable {
             public void handle(ActionEvent event) {
                 f1.setF1Name(txtName.getText());
                 f1.setF1Description(txtDescription.getText());
-                f1.setF0Name(txtDescription.getText());
+                f1.setLocation(txtDescription.getText());
 
                 List<F1Evidence> tmpF1EvidenceList = f1EvidenceList.stream()
                         .filter(f1Evidence -> f1Evidence.getPositive()!=0 || f1Evidence.getNeutral()!=0 || f1Evidence.getNegative()!=0)

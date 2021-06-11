@@ -44,7 +44,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtName" layoutX="663.0" layoutY="161.0" prefHeight="35.0" prefWidth="547.0">
+                  <TextField fx:id="txtName" layoutX="663.0" layoutY="161.0" prefHeight="35.0" prefWidth="676.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -54,7 +54,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtDescription" layoutX="663.0" layoutY="204.0" prefHeight="35.0" prefWidth="547.0">
+                  <TextField fx:id="txtDescription" layoutX="663.0" layoutY="204.0" prefHeight="35.0" prefWidth="676.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -63,7 +63,7 @@
                      <font>
                         <Font size="21.0" />
                      </font></Label>
-                  <Label layoutX="632.0" layoutY="31.0" text="Application supports to category F1" textFill="#962d2d">
+                  <Label layoutX="576.0" layoutY="32.0" text="APPLICATION SUPPORTS TO CATEGORIZE F1" textFill="#962d2d">
                      <font>
                         <Font size="36.0" />
                      </font></Label>
@@ -72,7 +72,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtF0Name" layoutX="663.0" layoutY="252.0" prefHeight="35.0" prefWidth="547.0">
+                  <TextField fx:id="txtF0Name" layoutX="663.0" layoutY="252.0" prefHeight="35.0" prefWidth="677.0">
                      <font>
                         <Font size="18.0" />
                      </font>

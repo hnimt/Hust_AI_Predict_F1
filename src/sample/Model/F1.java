@@ -4,31 +4,31 @@ public class F1 {
     private int F1Id;
     private String F1Name;
     private String F1Description;
-    private String F0Name;
+    private String location;
     private String F1UrlImage;
 
     public F1() {
     }
 
-    public F1(int f1Id, String f1Name, String f1Description, String f0Name, String f1UrlImage) {
+    public F1(int f1Id, String f1Name, String f1Description, String location, String f1UrlImage) {
         F1Id = f1Id;
         F1Name = f1Name;
         F1Description = f1Description;
-        F0Name = f0Name;
+        this.location = location;
         F1UrlImage = f1UrlImage;
     }
 
-    public F1(int f1Id, String f1Name, String f1Description, String f0Name) {
+    public F1(int f1Id, String f1Name, String f1Description, String location) {
         F1Id = f1Id;
         F1Name = f1Name;
         F1Description = f1Description;
-        F0Name = f0Name;
+        location = location;
     }
 
-    public F1(String f1Name, String f1Description, String f0Name) {
+    public F1(String f1Name, String f1Description, String location) {
         F1Name = f1Name;
         F1Description = f1Description;
-        F0Name = f0Name;
+        location = location;
     }
 
     public int getF1Id() {
@@ -55,12 +55,12 @@ public class F1 {
         F1Description = f1Description;
     }
 
-    public String getF0Name() {
-        return F0Name;
+    public String getLocation() {
+        return location;
     }
 
-    public void setF0Name(String f0Name) {
-        F0Name = f0Name;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getF1UrlImage() {

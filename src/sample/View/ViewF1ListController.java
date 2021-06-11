@@ -41,12 +41,14 @@ public class ViewF1ListController extends Stage{
             List<F1Disease> f1Diseases = f1Disease.getAllF1Disease();
             List<F1DiseaseView> f1DiseaseViews = new ArrayList<>();
             for (F1Disease f1Disease1 : f1Diseases){
-                int id = f1Disease1.getF1().getF1Id();
-                String f1Name = f1Disease1.getF1().getF1Name();
-                String disName = f1Disease1.getDisease().getDiseaseName();
-                float prediction = f1Disease1.getPrediction();
-                F1DiseaseView f1DiseaseView = new F1DiseaseView(id, f1Name, disName, prediction);
-                f1DiseaseViews.add(f1DiseaseView);
+                if(f1Disease1.getF1()!=null) {
+                    int id = f1Disease1.getF1().getF1Id();
+                    String f1Name = f1Disease1.getF1().getF1Name();
+                    String disName = f1Disease1.getDisease().getDiseaseName();
+                    float prediction = f1Disease1.getPrediction();
+                    F1DiseaseView f1DiseaseView = new F1DiseaseView(id, f1Name, disName, prediction);
+                    f1DiseaseViews.add(f1DiseaseView);
+                }
             }
 
             ObservableList obserF1Disease = FXCollections.observableArrayList(f1DiseaseViews);
@@ -54,7 +56,7 @@ public class ViewF1ListController extends Stage{
             tblF1Disease.setItems(obserF1Disease);
             tblF1Disease.getColumns().addAll(clId, clF1, clDisease, clPrediction);
         } catch (Exception e) {
-            System.out.println("Cannot find id");
+            e.printStackTrace();
         }
 
     }
