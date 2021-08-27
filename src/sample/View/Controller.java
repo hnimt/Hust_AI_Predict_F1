@@ -94,6 +94,7 @@ public class Controller implements Initializable {
                 txtResult.setText("");
                 grid.getChildren().clear();
                 f1EvidenceList.clear();
+                mnSave.setText("Fuck");
                 printSubGrid(evidenceList);
             }
         });

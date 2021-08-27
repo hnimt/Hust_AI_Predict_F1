@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th5 26, 2021 lúc 09:50 AM
+-- Thời gian đã tạo: Th6 11, 2021 lúc 09:02 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.5
 
@@ -85,12 +85,12 @@ CREATE TABLE `EvidenceDisease` (
 --
 
 INSERT INTO `EvidenceDisease` (`ID`, `Evidence`, `Disease`, `Positive`, `Neutral`, `Negative`) VALUES
-(1, 1, 1, 0.8, 0.05, 0.01),
-(2, 2, 1, 0.7, 0.1, 0.1),
-(3, 3, 1, 0.3, 0.2, 0.1),
+(1, 1, 1, 0.75, 0.15, 0.1),
+(2, 2, 1, 0.5, 0.4, 0.1),
+(3, 3, 1, 0.3, 0.4, 0.3),
 (4, 4, 1, 0.9, 0.03, 0.01),
-(5, 5, 1, 0.5, 0.2, 0.2),
-(6, 6, 1, 0.65, 0.15, 0.15);
+(5, 5, 1, 0.35, 0.35, 0.3),
+(6, 6, 1, 0.4, 0.33, 0.3);
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `F1` (
   `F1ID` int(10) UNSIGNED NOT NULL,
   `F1Name` text NOT NULL,
   `F1Description` text NOT NULL,
-  `F0Name` text NOT NULL,
+  `Location` text NOT NULL,
   `Image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -110,8 +110,15 @@ CREATE TABLE `F1` (
 -- Đang đổ dữ liệu cho bảng `F1`
 --
 
-INSERT INTO `F1` (`F1ID`, `F1Name`, `F1Description`, `F0Name`, `Image`) VALUES
-(1, 'Nguyen Van A', 'Tiep xuc voi Nguyen Van B', 'Tiep xuc voi Nguyen Van B', NULL);
+INSERT INTO `F1` (`F1ID`, `F1Name`, `F1Description`, `Location`, `Image`) VALUES
+(1, 'Nguyen Van A', 'Tiep xuc voi Nguyen Van B', 'Tiep xuc voi Nguyen Van B', NULL),
+(2, 'Nguyen Van B', 'Tiep xuc voi Nguyen Van A', 'Tiep xuc voi Nguyen Van A', NULL),
+(3, 'Tran Van A', 'Tiep xuc voi Nguyen Van A', 'Tiep xuc voi Nguyen Van A', NULL),
+(4, 'Tran Van D', 'Tiep xuc voi benh nhan Nguyen Van A', 'Tiep xuc voi benh nhan Nguyen Van A', NULL),
+(15, 'Le Van A', 'Tiep xuc voi Nguyen Van A tai nha rieng', 'Tiep xuc voi Nguyen Van A tai nha rieng', NULL),
+(16, 'Le Thi B', 'Tiep xuc voi Nguyen Van A tai co quan', 'Tiep xuc voi Nguyen Van A tai co quan', NULL),
+(17, 'Le Van C', 'Tiep xuc voi Nguyen Van A', 'Tiep xuc voi Nguyen Van A', NULL),
+(18, 'Le Thi D', 'Tiep xuc voi Nguyen Van A', 'Tiep xuc voi Nguyen Van A', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,7 +138,14 @@ CREATE TABLE `F1Disease` (
 --
 
 INSERT INTO `F1Disease` (`ID`, `F1`, `Disease`, `Prediction`) VALUES
-(1, 1, 1, 0.67185);
+(1, 1, 1, 0.67185),
+(2, 2, 1, 0.7625),
+(3, 3, 1, 0.2125),
+(4, 4, 1, 0.8991),
+(17, 15, 1, 0.8991),
+(18, 16, 1, 0.62135),
+(19, 17, 1, 0.01535),
+(20, 18, 1, 0.3941);
 
 -- --------------------------------------------------------
 
@@ -208,13 +222,13 @@ ALTER TABLE `Evidence`
 -- AUTO_INCREMENT cho bảng `F1`
 --
 ALTER TABLE `F1`
-  MODIFY `F1ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `F1ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `F1Disease`
 --
 ALTER TABLE `F1Disease`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `F1Evidence`
